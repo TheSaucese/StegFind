@@ -16,6 +16,11 @@
     background-color: var(--color-bg);
 }  
 
+main {
+    border-color: var(--color-text);
+}
+
+
 button {
     position: relative;
     text-align: center;
@@ -41,6 +46,10 @@ button::after {
 
 button:hover {
     color : var(--color-fg);
+}
+
+.drop:hover::after {
+    transform: scaleX(0);
 }
 
 button:hover::after {

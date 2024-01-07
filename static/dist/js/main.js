@@ -1,21 +1,4 @@
-const calculateSettingAsThemeString = ({ localStorageTheme, systemSettingDark }) => {
-    if (localStorageTheme !== null) {
-      return localStorageTheme;
-    }
-  
-    if (systemSettingDark.matches) {
-      return "dark";
-    }
-  
-    return "light";
-  }
-  
-  const localStorageTheme = localStorage.getItem("theme");
-  const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-  console.log(systemSettingDark)
-  
-  let currentThemeSetting = 'dark'
-
+var currentThemeSetting = 'dark';
 var embedfile;
 var img;
 
@@ -32,6 +15,20 @@ $(document).ready(function () {
         $(this).removeClass('dragging');
     });
 
+    $('#drop-area').on('click', function () {
+        $('#file-input').trigger('click'); 
+    });
+
+    $('#file-input').on('change', function () {
+        const file = this.files[0];
+        if (file) {
+            $('#drop-area').removeClass('dragging');
+            $('#drop-area').hide();
+            $('#loading').show();
+            uploadFiles(file);
+        }
+    });
+
     $('#drop-area').on('drop', function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -40,8 +37,8 @@ $(document).ready(function () {
 
         $('#loading').show();
 
-        let files = e.originalEvent.dataTransfer.files;
-        uploadFiles(files);
+        let file = e.originalEvent.dataTransfer.files;
+        uploadFiles(file);
 
     });
 
@@ -77,7 +74,7 @@ $(document).ready(function () {
                 response.img_data ? $("#img-upload").attr("src", response.img_data) : $("#SpectroButton").hide();
                 response.embedOutput ? ($("#Embed-output").text(response.embedOutput), embedfile=response.embedOutput) : $("#EmbedButton").hide();
                 response.file_path ? ($("#myImage").attr("src", response.file_path),img=response.file_path) : $("#myImage").hide();
-                $('#output-area').show();
+                $('#output-area').show().css('display', 'flex');
                 $('#loading').hide();
             }
         });
@@ -192,6 +189,5 @@ const updateContentOutput = (data) => {
 
 const updateExifOutpput = (data) => {
     newdata = data.replace( new RegExp( "/n", "g" ),"<br>");
-    console.log(newdata)
     document.getElementById("EXIF-output").innerHTML = newdata;
 }
