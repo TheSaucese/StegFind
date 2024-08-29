@@ -1,0 +1,88 @@
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-text: #445E31;
+  --color-fg: #81ad5f;
+}
+
+[data-theme="dark"] {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-fg: #7E52A0;
+}
+
+:root {
+    font-family: monospace;
+    color : var(--color-text);
+    background-color: var(--color-bg);
+}  
+
+main {
+    border-color: var(--color-text);
+}
+
+
+button {
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding-left: 1rem !important; 
+    padding-right: 1rem !important;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-fg);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    color : var(--color-fg);
+}
+
+.drop:hover::after {
+    transform: scaleX(0);
+}
+
+button:hover::after {
+    transform: scaleX(1);
+}
+
+.selected {
+    background-color : var(--color-text);
+    color : var(--color-bg);
+}
+
+input {
+    background-color: var(--color-bg);
+}
+
+.container {
+    min-width: 100% !important;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 5% 1fr 5% 1fr 5% 1fr 5% 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "SuperImposed SuperImposed SuperImposed SuperImposed SuperImposed SuperImposed SuperImposed SuperImposed"
+      ". . . . . . . ."
+      "Red Red Red Red Red Red Red Red"
+      ". . . . . . . ."
+      "Green Green Green Green Green Green Green Green"
+      ". . . . . . . ."
+      "Blue Blue Blue Blue Blue Blue Blue Blue"
+      ". . . . . . . ."; 
+  }
+  .SuperImposed { grid-area: SuperImposed; }
+  .Red { grid-area: Red; }
+  .Green { grid-area: Green; }
+  .Blue { grid-area: Blue; }
+
