@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+
+<head>
+    <title>StegFind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/dist/js/main.js"></script>
+</head>
+
+<body class="flex flex-col justify-between h-screen items-center"></body>
+<header class="p-2 flex w-full gap-5 text-2xl rounded-sm">
+    <div class="text-6xl"> StegFind </div>
+    <button> Download Data </button>
+    <button> History </button>
+    <button>
+    <a href="https://github.com/TheSaucese/StegFind"> GitHub </a>
+    </button>
+    <button id="light-mode-button" onclick="toggleMode(event)" class="ml-auto"> Light Theme </button>
+</header>
+
+<main class="flex w-full h-[75%] border-2">
+    <button id="drop-area" class="w-full flex items-center justify-center text-9xl text-center drop">
+        Drop your File here
+    </button>
+    <input type="file" id="file-input" style="display: none;" />
+    <div hidden id="loading" class="m-auto animate-spin items-center justify-center text-9xl text-center">
+        ...Loading
+    </div>
+    <output hidden id="output-area" class="w-full flex-col h-full text-[2rem] leading-none">
+        <div class="tab text-6xl">
+            <button id="OutputButton" class="tablinks"
+                onclick="openTab(event, 'Output');">Channels</button>
+            <button id="StringButton" class="tablinks"
+                onclick="openTab(event, 'String');">String</button>
+            <button id="HexDumpButton" class="tablinks"
+                onclick="openTab(event, 'Content');">HexDump</button>
+            <button id="ExifButton" class="tablinks"    
+                onclick="openTab(event, 'EXIF');">EXIF</button>
+            <button id="LsbButton" class="tablinks"    
+                onclick="openTab(event, 'LSB');">LSB</button>
+            <button id="SpectroButton" class="tablinks"    
+                onclick="openTab(event, 'Spectrogram');">Spectrogram</button>
+            <button id="FilesButton" class="tablinks"
+                onclick="openTab(event, 'Files');">Files</button>
+        </div>
+
+        <div hidden id="Output" class="tabcontent container flex-grow overflow-auto overflow-x-hidden">
+            <div class="SuperImposed"> Superimposed </div>
+                <img id="Image1">
+                <img id="Image2">
+                <img id="Image3">
+                <img id="Image4">
+                <img id="Image5">
+                <img id="Image6">
+                <img id="Image7">
+                <img id="Image8">
+            <div class="Red"> Red </div>
+                <img id="Image9">
+                <img id="Image10">
+                <img id="Image11">
+                <img id="Image12">
+                <img id="Image13">
+                <img id="Image14">
+                <img id="Image15">
+                <img id="Image16">
+            <div class="Green"> Green </div>
+                <img id="Image17">
+                <img id="Image18">
+                <img id="Image19">
+                <img id="Image20">
+                <img id="Image21">
+                <img id="Image22">
+                <img id="Image23">
+                <img id="Image24">
+            <div class="Blue"> Blue </div>
+                <img id="Image25">
+                <img id="Image26">
+                <img id="Image27">
+                <img id="Image28">
+                <img id="Image29">
+                <img id="Image30">
+                <img id="Image31">
+                <img id="Image32">
+        </div>
+
+        <div hidden id="String" class="tabcontent h-[90%] ">
+            <p class="overflow-auto overflow-x-hidden h-full" id="String-output"></p>
+        </div>
+
+        <div hidden id="Content" class="tabcontent h-[90%]">
+            <p class="overflow-auto overflow-x-hidden h-full" id="Content-output"> </p>
+        </div>
+
+        <div hidden id="EXIF" class="tabcontent h-[90%]">
+            <p class="overflow-auto overflow-x-hidden h-full" id="EXIF-output"></p>
+        </div>
+
+        <div hidden id="LSB" class="tabcontent h-[90%]">
+            <p class="overflow-auto overflow-x-hidden h-full" id="LSB-output"></p>
+        </div>
+        
+        <div hidden id="Files" class="tabcontent h-[90%] flex flex-col justify-center gap-12">
+            <img class="h-1/2 m-auto mt-[5rem]" src="" type="hidden" id="myImage" name="image"/> 
+            <div class="h-1/2 flex flex-col mb-[1rem] items-center">
+                <div> Enter the passphrase </div>
+                <input type="text" id="pass" name='pass' class="border-2">
+                <button class="border-2 p-2 mt-5" id="decrypt-button"> Decrypt </button>
+                <p hidden id="decryting"> decrypting... </p>
+                <p hidden id="result" class="" > Found something ! </p>
+                <p hidden id="Embed-output" class="overflow-auto overflow-x-hidden h-full"></p>
+            </div>
+        </div>
+
+        <div hidden id="Spectrogram" class="tabcontent h-[90%]">
+            <img class="overflow-auto overflow-x-hidden h-full" id="img-upload" alt="img_data"/>
+        </div>
+
+    </output>
+</main>
+
+<footer>
+    <p>&copy; 2024 StegFind. All rights reserved.</p>
+</footer>
+</body>
+
+</html>
